@@ -373,39 +373,39 @@ Istio 支持多种安装方式，也有很多参数可以设置，详见[官方�
     ##### 访问 grafana （admin/admin）
 
     ```sh
-    $ kubectl port-forward --address 0.0.0.0 pod/grafana-67c69bb567-8srps -n istio-system 3000:3000
+    $ kubectl port-forward --address 0.0.0.0 $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') -n istio-system 3000:3000
     ```
 
-    浏览器访问 http://\<IP>:3000，其中 \<IP> 为执行上述命令的主机 IP
-
-    选择 Galley Dashboard，你会看到类似如下的内容
+    浏览器访问 http://\<IP>:3000，其中 \<IP> 为执行上述命令的主机 IP，选择 Galley Dashboard
 
     ![](../assets/istio-grafana-preview.png)
 
+    ##### 访问 Prometheus
+
+    ```sh
+    $ kubectl port-forward --address 0.0.0.0 $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') -n istio-system 9090:9090
+    ```
+
+    浏览器访问 http://\<IP>:9090，其中 \<IP> 为执行上述命令的主机 IP
+
+    ![](../assets/istio-prometheus-preview.png)
+
+    ##### 访问 Jaeger
+
+    ```sh
+    $ kubectl port-forward --address 0.0.0.0 $(kubectl -n istio-system get pod -l app=jaeger -o jsonpath='{.items[0].metadata.name}') -n istio-system 16686:16686
+    ```
+
+    浏览器访问 http://\<IP>:16686，其中 \<IP> 为执行上述命令的主机 IP
+
+    ![](../assets/istio-jaeger-preview.png)
+
     ##### 访问 kiali （admin/admin）
 
-    注意这里需要预先配置下 kiali 的 ConfigMap（可能是这个版本的缺陷）
-
     ```sh
-    $ kubectl edit cm kiali -n istio-system
-    ```
-
-    配置上 grafana 的地址：
-
-    ```yaml
-    external_services:
-        grafana:
-            url: http://grafana.istio-system:3000
-    ```
-
-    然后重启 kiali Pod，再开启端口转发
-
-    ```sh
-    $ kubectl port-forward --address 0.0.0.0 pod/kiali-d4d886dd7-mrzt8 -n istio-system 20001:20001
+    $ kubectl port-forward --address 0.0.0.0 $(kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}') -n istio-system 20001:20001
     ```
 
     浏览器访问 http://\<IP>:20001/kiali，其中 \<IP> 为执行上述命令的主机 IP
-
-    你会看到类似如下的内容
 
     ![](../assets/istio-kiali-preview.png)
