@@ -932,9 +932,9 @@
 
 7. 检查集群状态
 
-   ```sh
-   $ kubectl get node
-   NAME                STATUS   ROLES    AGE   VERSION
+    ```sh
+    $ kubectl get node
+    NAME                STATUS   ROLES    AGE   VERSION
     node-algt-bocloud   Ready    <none>   17s   v1.14.2
     node-mjfk-bocloud   Ready    master   18m   v1.14.2
     node-ttnm-bocloud   Ready    <none>   13s   v1.14.2
