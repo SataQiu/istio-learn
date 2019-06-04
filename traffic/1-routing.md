@@ -192,6 +192,13 @@
 
     基于用户的路由配置成功！
 
+5. 清理路由策略
+
+   ```sh
+   $ kubectl delete -f samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml
+   $ kubectl delete -f reviews-destions.yaml
+   ```
+
 ##### 原理分析
 
 1. `productpage.py` 程序代码如下
