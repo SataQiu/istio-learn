@@ -2,7 +2,7 @@
 
 本文演示 Istio 故障注入的基本方式。
 
-1. 在上文**路由控制**环境基础上，设置如下路由策略
+1. 部署 Bookinfo 样例程序（部署方法详见[路由控制](1-routing.md)），设置如下路由策略
 
     ```sh
     $ kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
